@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма вывода поездок</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>Форма вывода поездок с фильтрацией по дате</h2>
+<form id="tripForm">
+    <label for="tripDate">Выберите дату:</label>
+    <input type="date" id="tripDate" name="tripDate">
+    <button type="submit">Показать поездки</button>
+</form>
+
+<div id="tripResults">
+</div>
+<script src="trip_script.js"></script>
+</body>
+</html>

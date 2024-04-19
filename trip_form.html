@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Форма внесения поездки</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form id="tripForm" action="submit_trip.php" method="post">
+    <label for="region">Регион:</label>
+    <select id="region" name="region"></select><br><br>
+
+    <label for="departureDate">Дата выезда из Москвы:</label>
+    <input type="date" id="departureDate" name="departureDate"><br><br>
+
+    <label for="courier">ФИО курьера:</label>
+    <select id="courier" name="courier"></select><br><br>
+
+    <button type="button" onclick="submitTrip()">Добавить поездку</button>
+</form>
+
+<script>
+    // Функция для отправки данных формы на сервер
+    function submitTrip() {
+        var data = {
+            region: $('#region').val(),
+            departureDate: $('#departureDate').val(),
+            courier: $('#courier').val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: 'submit_trip.php',
+            data: data,
+            success: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Функция для заполнения выпадающего списка регионов
+        function fillRegions() {
+            $.ajax({
+                type: 'GET',
+                url: 'get_regions.php', // Файл PHP для получения данных о регионах
+                success: function (response) {
+                    $('#region').html(response);
+                }
+            });
+        }
+
+        // Функция для заполнения выпадающего списка курьеров
+        function fillCouriers() {
+            $.ajax({
+                type: 'GET',
+                url: 'get_couriers.php', // Файл PHP для получения данных о курьерах
+                success: function (response) {
+                    $('#courier').html(response);
+                }
+            });
+        }
+
+        // Вызываем функции для заполнения списков при загрузке страницы
+        fillRegions();
+        fillCouriers();
+    });
+</script>
+
+</body>
+</html>
